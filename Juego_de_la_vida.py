@@ -75,7 +75,7 @@ if __name__ == '__main__':
     width, height = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) - 78
 
     # Crear la ventana del juego
-    os.environ['SDL_VIDEO_WINDOW_POS'] = '%d,%d' % (0, 35)
+    os.environ['SDL_VIDEO_WINDOW_POS'] = '%d,%d' % (0, 33)
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Juego de la vida')
 
