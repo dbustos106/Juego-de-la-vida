@@ -3,7 +3,7 @@ from Letras.e import imageE
 from Letras.a import imageA
 from Letras.m import imageM
 from Letras.o import imageO
-from todo import imageTodo
+from Letras.todo import imageTodo
 import numpy as np
 import pygame
 import ctypes
@@ -197,7 +197,9 @@ if __name__ == '__main__':
                     r, g, b = 62, 1, 74
                     dimCH = height / nyC
                     dimCW = (width - ctr) / nxC
-                    pygame.mixer.music.rewind()
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("Canciones/chachacha.mp3")
+                    pygame.mixer.music.play()
                     pygame.mixer.music.pause()
                     gameState = np.zeros((nxC, nyC))
                     newGameState = imageT(nxC, nyC)
