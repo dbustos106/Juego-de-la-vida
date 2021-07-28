@@ -72,7 +72,7 @@ if __name__ == '__main__':
     # Calcular las dimensiones de la ventana
     user32 = ctypes.windll.user32
     user32.SetProcessDPIAware()
-    width, height = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) - 78
+    width, height = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) - 50
 
     # Crear la ventana del juego
     os.environ['SDL_VIDEO_WINDOW_POS'] = '%d,%d' % (0, 30)
