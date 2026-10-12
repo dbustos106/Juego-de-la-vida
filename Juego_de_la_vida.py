@@ -1,279 +1,167 @@
 from Letras.t import imageT
-from Letras.e import imageE
-from Letras.a import imageA
-from Letras.m import imageM
-from Letras.o import imageO
 from Letras.todo import imageTodo
+
 import numpy as np
 import pygame
 import ctypes
 import time
 import os
 
+BG = (126, 120, 119)
+GRID = (143, 143, 143)
+COLOR_CELDA = (62, 1, 74)
 
-"""
-Función que imprime botones
-"""
-def botton(screen, dir, posX, posY, width, height):
-    imagen = pygame.image.load(dir)
-    picture = pygame.transform.scale(imagen, [width, height])
-    screen.blit(picture, [posX, posY])
+CTR = 58                      # ancho del panel de botones
+LIMITE_RELOJ = 810            # frames hasta cerrar (None para desactivar)
 
 
-"""
-Función que actualiza filas
-"""
-def actualizarColum():
-
-    for x in range(0, nxC):
-        for y in range(0, nyC):
-
-            # Si no hay pausa, actualiza los estados
-            if not pauseExect:
-                n_neigh  =  gameState[(x - 1) % nxC, (y - 1) % nyC] + \
-                            gameState[(x)  % nxC   , (y - 1) % nyC] + \
-                            gameState[(x + 1) % nxC, (y - 1) % nyC] + \
-                            gameState[(x - 1) % nxC, (y) % nyC] + \
-                            gameState[(x + 1) % nxC, (y) % nyC] + \
-                            gameState[(x - 1) % nxC, (y + 1) % nyC] + \
-                            gameState[(x) % nxC    , (y + 1) % nyC] + \
-                            gameState[(x + 1) % nxC, (y + 1) % nyC]
-
-                if gameState[x, y] == 0 and n_neigh == 3:
-                    newGameState[x, y] = 1
-
-                elif gameState[x, y] == 1 and (n_neigh < 2 or n_neigh > 3):
-                    newGameState[x, y] = 0
-
-            # Crear los poligonos
-            poly = [((x)     * dimCW, y * dimCH),
-                    ((x + 1) * dimCW, y * dimCH), 
-                    ((x + 1) * dimCW, (y + 1) * dimCH),
-                    ((x)     * dimCW, (y + 1) * dimCH)]
-
-            # Imprimir las celdas
-            if newGameState[x, y] == 0:
-                pygame.draw.polygon(screen, (143, 143, 143), poly, 1)
-            else:
-                pygame.draw.polygon(screen, (r,g,b), poly, 0)
-                pygame.draw.polygon(screen, (143, 143, 143), poly, 1)
+def cargar(ruta, ancho, alto):
+    img = pygame.image.load(ruta).convert_alpha()
+    return pygame.transform.scale(img, (ancho, alto))
 
 
-if __name__ == '__main__':
+def siguiente_estado(estado):
+    """Un paso del juego de la vida."""
+    vecinos = sum(
+        np.roll(np.roll(estado, dx, axis=0), dy, axis=1)
+        for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+        if (dx, dy) != (0, 0)
+    )
+    return ((vecinos == 3) | ((estado == 1) & (vecinos == 2))).astype(estado.dtype)
 
+
+def crear_cuadricula(ancho_px, alto_px, nxC, nyC, dimCW, dimCH):
+    """Dibuja las líneas de la cuadrícula."""
+    surf = pygame.Surface((ancho_px, alto_px), pygame.SRCALPHA)
+    for x in range(nxC + 1):
+        pygame.draw.line(surf, GRID, (x * dimCW, 0), (x * dimCW, alto_px))
+    for y in range(nyC + 1):
+        pygame.draw.line(surf, GRID, (0, y * dimCH), (ancho_px, y * dimCH))
+    return surf
+
+
+def dibujar_celdas(screen, estado, dimCW, dimCH, color):
+    w, h = int(dimCW) + 1, int(dimCH) + 1
+    for x, y in np.argwhere(estado == 1):
+        screen.fill(color, (int(x * dimCW), int(y * dimCH), w, h))
+
+
+def main():
     pygame.init()
-    pygame.mixer.init()
-    
-    # Cargar musica
-    pygame.mixer.music.load("Canciones/chachacha.mp3")
-    pygame.mixer.music.set_volume(0.6)
-    pygame.mixer.music.play()
 
-    # Calcular las dimensiones de la ventana
     user32 = ctypes.windll.user32
     user32.SetProcessDPIAware()
     width, height = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) - 65
 
-    # Crear la ventana del juego
     os.environ['SDL_VIDEO_WINDOW_POS'] = '%d,%d' % (0, 27)
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Juego de la vida')
 
-    # Cambiar el icono
-    icono = pygame.image.load("Imagenes/play1.png")
-    pygame.display.set_icon(icono)
+    # Cargar imagenes
+    pygame.display.set_icon(pygame.image.load("Imagenes/play1.png"))
+    img_fondo = cargar("Imagenes/fondo.png", 57, height)
+    img_contenedor = cargar("Imagenes/contenedor.png", 50, 300)
+    img_puntero = cargar("Imagenes/puntero.png", 25, 20)
+    img_play1 = cargar("Imagenes/play1.png", 57, 57)
+    img_play2 = cargar("Imagenes/play2.png", 57, 57)
+    img_reset1 = cargar("Imagenes/reset1.png", 57, 57)
+    img_reset2 = cargar("Imagenes/reset2.png", 57, 57)
 
-    bg = 126, 120, 119
-    screen.fill(bg)
-    
-    # Calcular las dimensiones de las celdas
-    ctr, nxC, nyC = 58, 200, 100
-    dimCW = (width - ctr) / nxC
+    # Dimensiones del mundo
+    nxC, nyC = 200, 100
+    dimCW = (width - CTR) / nxC
     dimCH = height / nyC
+    grid = crear_cuadricula(width - CTR, height, nxC, nyC, dimCW, dimCH)
 
-    r, g, b = 62, 1, 74
-
-    # Inicializar el estado del juego
     gameState = imageT(nxC, nyC)
-    cambiarPosPuntero = False
     pauseExect = False
+    arrastrando = False
     posPuntero = 161
     tiempoClick = 0
     velocidad = 0
     reloj = 0
-    
-    while True:
 
-        screen.fill(bg)
+    en_play = lambda x, y: width - 60 < x < width and 0 < y < 57
+    en_reset = lambda x, y: width - 60 < x < width and 70 < y < 127
+
+    while True:
         time.sleep(velocidad)
 
+        if LIMITE_RELOJ is not None and reloj == LIMITE_RELOJ:
+            break
 
-
-        ### ------------------ Cambiar escenario ------------------ ###
-
-        if reloj == 225:
-
-            r,g, b = 5, 64, 0
-            nxC, nyC = 200, 100
-            dimCH = height / nyC
-            dimCW = (width - ctr) / nxC
-            gameState = imageE(nxC, nyC)
-
-        elif reloj == 337:
-
-            r,g, b = 12, 0, 89
-            nxC, nyC = 200, 96
-            dimCH = height / nyC
-            dimCW = (width - ctr) / nxC
-            gameState = imageA(nxC, nyC)
-
-        elif reloj == 507:
-
-            r,g, b = 46, 0, 6
-            nxC, nyC = 200, 100
-            dimCH = height / nyC
-            dimCW = (width - ctr) / nxC
-            gameState = imageM(nxC, nyC)
-
-        elif reloj == 698:
-
-            r,g, b = 0, 43, 11
-            nxC, nyC = 200, 100
-            dimCH = height / nyC
-            dimCW = (width - ctr) / nxC
-            gameState = imageO(nxC, nyC)
-            
-        elif reloj == 750:
-
-            # Cambiar canción
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load("Canciones/SiHayAlgo.mp3")
-            pygame.mixer.music.play()
-            r,g, b = 61, 1, 42
-            nxC, nyC = 600, 250
-            dimCH = height / nyC
-            dimCW = (width - ctr) / nxC
-            gameState = imageTodo(nxC, nyC)
-
-        elif reloj == 810:
-            pygame.quit()
-            exit()
-                    
-
-
-        # Copiar el estado del juego
-        newGameState = np.copy(gameState)
-
-        # Obtener la posicicón del mouse
         posX, posY = pygame.mouse.get_pos()
 
-
-
-        ### ------------------ Capturar eventos ------------------ ###
-
+        # ------------------ Eventos ------------------ #
         for event in pygame.event.get():
-
-            ##  Detener la actualización de las celdas ##
-            if event.type == pygame.KEYDOWN:
-                pauseExect = not pauseExect
-                if pauseExect:
-                    pygame.mixer.music.pause()
-                else:
-                    pygame.mixer.music.unpause()
-
-            ## Detectar cuando se hace click ##
-            mouseClick = pygame.mouse.get_pressed()
-            
-            if sum(mouseClick) > 0:    
-
-                ## Cambiar manualmente el estado de las celdas
-                if posX < width - ctr:
-                    celX, celY = int(np.floor(posX / dimCW)), int(np.floor(posY / dimCH))
-                    newGameState[celX, celY] = not mouseClick[2]
-
-                ## Resetear 
-                elif (width-60 < posX and posX < width) and (70 < posY and posY < 127) and (cambiarPosPuntero == False):
-                    nxC, nyC = 200, 100
-                    r, g, b = 62, 1, 74
-                    dimCH = height / nyC
-                    dimCW = (width - ctr) / nxC
-                    pygame.mixer.music.stop()
-                    pygame.mixer.music.load("Canciones/chachacha.mp3")
-                    pygame.mixer.music.play()
-                    pygame.mixer.music.pause()
-                    gameState = np.zeros((nxC, nyC))
-                    newGameState = imageT(nxC, nyC)
-                    pauseExect = True
-                    reloj = 0
-
-                ## Play
-                if (width-60 < posX and posX < width) and (0 < posY and posY < 57) and (cambiarPosPuntero == False):
-                    pygame.mixer.music.unpause()
-                    pauseExect = False
-
-                ## Cambiar velocidad
-                if (width-41 < posX and posX < width-16):
-                    if (posPuntero < posY and posY < posPuntero+20):
-                        if time.time() - tiempoClick < 0.5:
-                            cambiarPosPuntero = True
-                        tiempoClick = time.time()
-                    else:
-                        cambiarPosPuntero = True
-
-            ## Detectar cuando se suelta el click ##
-            if event.type == pygame.MOUSEBUTTONUP:  
-                cambiarPosPuntero = False
-
-            ## Cerrar la ventana ##
             if event.type == pygame.QUIT:
                 pygame.quit()
-                exit()
+                return
 
+            if event.type == pygame.KEYDOWN:
+                pauseExect = not pauseExect
 
+            if event.type == pygame.MOUSEBUTTONUP:
+                arrastrando = False
 
-        ### ------------------ Cambiar botones ------------------ ###
+        mouseClick = pygame.mouse.get_pressed()
+        if sum(mouseClick) > 0:
+            if posX < width - CTR:
+                # Pintar (izq) o borrar (der) celdas
+                celX = min(int(posX / dimCW), nxC - 1)
+                celY = min(int(posY / dimCH), nyC - 1)
+                gameState[celX, celY] = 0 if mouseClick[2] else 1
 
-        botton(screen, "Imagenes/fondo.png", width-57, 0, 57, height)
+            elif en_reset(posX, posY) and not arrastrando:
+                gameState = imageT(nxC, nyC)
+                pauseExect = True
+                reloj = 0
 
-        if (cambiarPosPuntero == True) and (161 < posY and posY < 415):
-            posPuntero = posY
-            velocidad = (posPuntero - 161) * 0.3/254
-        elif (cambiarPosPuntero == True) and (posY < 161):
-            posPuntero = 161
-            velocidad = (posPuntero - 161) * 0.3/254
-        elif (cambiarPosPuntero == True) and (415 < posY):
-            posPuntero = 415
-            velocidad = (posPuntero - 161) * 0.3/254
-        
-        botton(screen, "Imagenes/contenedor.png", width-54, 150, 50, 300)
-        botton(screen, "Imagenes/barraGris.png", width-41, 161, 25, abs(posPuntero - 160))
-        botton(screen, "Imagenes/puntero.png", width-41, posPuntero, 25, 20)
+            elif en_play(posX, posY) and not arrastrando:
+                pauseExect = False
 
-        # Play
-        if (width-60 < posX and posX < width) and (0 < posY and posY < 57):
-            botton(screen, "Imagenes/play2.png", width-57, 0, 57, 57)
-            botton(screen, "Imagenes/reset1.png", width-57, 70, 57, 57)
-        # Reset
-        elif (width-60 < posX and posX < width) and (70 < posY and posY < 127):
-            botton(screen, "Imagenes/play1.png", width-57, 0, 57, 57)
-            botton(screen, "Imagenes/reset2.png", width-57, 70, 57, 57)
+            # Slider de velocidad
+            if width - 41 < posX < width - 16:
+                if posPuntero < posY < posPuntero + 20:
+                    if time.time() - tiempoClick < 0.5:
+                        arrastrando = True
+                    tiempoClick = time.time()
+                else:
+                    arrastrando = True
+
+        if arrastrando:
+            posPuntero = max(161, min(415, posY))
+            velocidad = (posPuntero - 161) * 0.3 / 254
+
+        # ------------------ Actualizar ------------------ #
+        if not pauseExect:
+            gameState = siguiente_estado(gameState)
+            reloj += 1
+
+        # ------------------ Dibujar ------------------ #
+        screen.fill(BG)
+        dibujar_celdas(screen, gameState, dimCW, dimCH, COLOR_CELDA)
+        screen.blit(grid, (0, 0))
+
+        screen.blit(img_fondo, (width - 57, 0))
+        screen.blit(img_contenedor, (width - 54, 150))
+        pygame.draw.rect(screen, GRID, (width - 41, 161, 25, abs(posPuntero - 160)))
+        screen.blit(img_puntero, (width - 41, posPuntero))
+
+        if en_play(posX, posY):
+            screen.blit(img_play2, (width - 57, 0))
+            screen.blit(img_reset1, (width - 57, 70))
+        elif en_reset(posX, posY):
+            screen.blit(img_play1, (width - 57, 0))
+            screen.blit(img_reset2, (width - 57, 70))
         else:
-            botton(screen, "Imagenes/play1.png", width-57, 0, 57, 57)
-            botton(screen, "Imagenes/reset1.png", width-57, 70, 57, 57)
+            screen.blit(img_play1, (width - 57, 0))
+            screen.blit(img_reset1, (width - 57, 70))
 
-
-
-        ### ------------------ Actualización de estados ------------------ ###
-        actualizarColum()
-
-
-
-        ### ------------------ Actualiza el estado de las celdas ------------------ ###
-        gameState = np.copy(newGameState)
         pygame.display.flip()
 
+    pygame.quit()
 
 
-        if not pauseExect:
-            reloj = reloj + 1
-    
+if __name__ == '__main__':
+    main()
