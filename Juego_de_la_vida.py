@@ -1,4 +1,11 @@
 from Letras.t import imageT
+from Letras.e import imageE
+from Letras.a import imageA
+from Letras.m import imageM
+from Letras.o import imageO
+from Letras.i import imageI
+from Letras.s import imageS
+from Letras.z import imageZ
 from Letras.todo import imageTodo
 
 import numpy as np
@@ -14,21 +21,21 @@ GRID = (143, 143, 143)
 CELL_COLOR = (62, 1, 74)
 
 PANEL_WIDTH = 58
-MAX_FRAMES = 810 
+MAX_FRAMES = None 
 
 SEQUENCE = [
+    {
+        "name": "Z",
+        "generator": imageS,
+        "nxC": 200,
+        "nyC": 150,
+        "duration": 70,
+    },
     {
         "name": "T",
         "generator": imageT,
         "nxC": 200,
         "nyC": 150,
-        "duration": 4,
-    },
-    {
-        "name": "TE AMO",
-        "generator": imageTodo,
-        "nxC": 570,
-        "nyC": 250,
         "duration": 6,
     },
 ]
@@ -141,7 +148,15 @@ def handle_events(state, screen_width):
             return False
 
         if event.type == pygame.KEYDOWN:
-            state["paused"] = not state["paused"]
+            if event.key == pygame.K_p:
+                positions = np.argwhere(state["game_state"] == 1)
+
+                print("\n# Coordenadas de las celdas activas")
+                for x, y in positions:
+                    print(f"    gameState[{x}, {y}] = 1")
+
+            else:
+                state["paused"] = not state["paused"]
 
         if event.type == pygame.MOUSEBUTTONUP:
             state["dragging"] = False
