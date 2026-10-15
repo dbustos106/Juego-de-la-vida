@@ -6,6 +6,7 @@ from Letras.o import imageO
 from Letras.i import imageI
 from Letras.s import imageS
 from Letras.z import imageZ
+from Letras.arco import imageArco
 from Letras.todo import imageTodo
 
 import numpy as np
@@ -25,18 +26,11 @@ MAX_FRAMES = None
 
 SEQUENCE = [
     {
-        "name": "Z",
-        "generator": imageS,
-        "nxC": 200,
+        "name": "Todo",
+        "generator": imageTodo,
+        "nxC": 600,
         "nyC": 150,
         "duration": 70,
-    },
-    {
-        "name": "T",
-        "generator": imageT,
-        "nxC": 200,
-        "nyC": 150,
-        "duration": 6,
     },
 ]
 

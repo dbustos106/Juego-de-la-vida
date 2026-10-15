@@ -1,11 +1,11 @@
 import numpy as np
-from Letras.arco import imageArco
+from Letras.s import imageS
 
-gameState = imageArco(200, 150)
+gameState = imageS(200, 150)
 coords = np.argwhere(gameState == 1)
 
-# Simetría en x, manteniendo y
-coords[:, 0] = coords[:, 0].min() + coords[:, 0].max() - coords[:, 0]
+# Desplazar S 300 unidades hacia la derecha (+x)
+coords[:, 0] += 390
 
 for x, y in coords:
     print(f"gameState[{x}, {y}] = 1")
