@@ -6,8 +6,6 @@ from Letras.o import imageO
 from Letras.i import imageI
 from Letras.s import imageS
 from Letras.z import imageZ
-from Letras.arco import imageArco
-from Letras.todo import imageTodo
 
 import numpy as np
 import pygame
@@ -26,11 +24,24 @@ MAX_FRAMES = None
 
 SEQUENCE = [
     {
-        "name": "Todo",
-        "generator": imageTodo,
-        "nxC": 600,
+        "name": "TE",
+        "nxC": 200,
         "nyC": 150,
         "duration": 70,
+        "letters": [
+            {"generator": imageT, "x": 20, "y": 0},
+            {"generator": imageE, "x": 50, "y": 10},
+        ],
+    },
+    {
+        "name": "AM",
+        "nxC": 200,
+        "nyC": 150,
+        "duration": 70,
+        "letters": [
+            {"generator": imageA, "x": 0, "y": 0},
+            {"generator": imageM, "x": 40, "y": 0},
+        ],
     },
 ]
 
@@ -74,7 +85,6 @@ def create_grid(width, height, nxC, nyC, cell_width, cell_height):
 
     return surface
 
-
 def draw_cells(screen, state, cell_width, cell_height, color):
     """Draw active cells."""
 
@@ -89,7 +99,7 @@ def draw_cells(screen, state, cell_width, cell_height, color):
 # -------------------- Sequence management --------------------
 
 def load_pattern(state, index):
-    """Load a pattern and adapt the grid to its dimensions."""
+    """Load multiple letters into a single game state."""
 
     config = SEQUENCE[index]
 
@@ -97,9 +107,39 @@ def load_pattern(state, index):
     state["nxC"] = config["nxC"]
     state["nyC"] = config["nyC"]
 
-    state["game_state"] = config["generator"](
-        state["nxC"], state["nyC"]
+    # Initialize an empty grid
+    game_state = np.zeros(
+        (state["nxC"], state["nyC"]),
+        dtype=np.uint8,
     )
+
+    # Load and position each letter
+    for letter in config["letters"]:
+
+        pattern = letter["generator"](
+            state["nxC"], state["nyC"]
+        )
+
+        coords = np.argwhere(pattern == 1)
+
+        # Apply horizontal and vertical displacement
+        coords[:, 0] += letter["x"]
+        coords[:, 1] += letter["y"]
+
+        # Keep only coordinates inside the grid
+        valid = (
+            (coords[:, 0] >= 0)
+            & (coords[:, 0] < state["nxC"])
+            & (coords[:, 1] >= 0)
+            & (coords[:, 1] < state["nyC"])
+        )
+
+        coords = coords[valid]
+
+        # Add the letter to the combined grid
+        game_state[coords[:, 0], coords[:, 1]] = 1
+
+    state["game_state"] = game_state
 
     state["dimCW"] = state["draw_width"] / state["nxC"]
     state["dimCH"] = state["draw_height"] / state["nyC"]
@@ -248,7 +288,7 @@ def main():
     user32.SetProcessDPIAware()
 
     screen_width = user32.GetSystemMetrics(0)
-    screen_height = user32.GetSystemMetrics(1) - 65
+    screen_height = user32.GetSystemMetrics(1) - 70
 
     os.environ["SDL_VIDEO_WINDOW_POS"] = "0,27"
     screen = pygame.display.set_mode((screen_width, screen_height))

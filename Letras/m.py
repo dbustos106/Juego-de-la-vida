@@ -1,525 +1,411 @@
 import numpy as np
 
-# Caso de prueba
 def imageM(nxC, nyC):
     gameState = np.zeros((nxC, nyC))
 
-    gameState[146,99] = 1
-    gameState[146,98] = 1
-
-    gameState[147,98] = 1
-
-    gameState[148,96] = 1
-    gameState[148,98] = 1
-
-    gameState[149,97] = 1
-    gameState[149,96] = 1
-
-    gameState[155,96] = 1
-
-    gameState[156,96] = 1
-    gameState[156,95] = 1
-    gameState[156,94] = 1
-
-    gameState[157,93] = 1
-
-    gameState[158,93] = 1
-    gameState[158,94] = 1
-
-    gameState[163,91] = 1
-
-    gameState[164,90] = 1
-    gameState[164,91] = 1
-    gameState[164,92] = 1
-
-    gameState[165,89] = 1
-    gameState[165,90] = 1
-    gameState[165,91] = 1
-    gameState[165,92] = 1
-    gameState[165,93] = 1
-
-    gameState[166,90] = 1
-    gameState[166,92] = 1
-    gameState[166,88] = 1
-    gameState[166,94] = 1
-
-    gameState[167,88] = 1
-    gameState[167,94] = 1
-    gameState[167,89] = 1
-    gameState[167,93] = 1
-
-    gameState[170,88] = 1
-    gameState[170,89] = 1
-
-    gameState[171,88] = 1
-    gameState[171,89] = 1
-
-    gameState[172,87] = 1
-    
-    gameState[173,87] = 1
-    gameState[173,88] = 1
-    gameState[173,89] = 1
-
-    gameState[174,91] = 1
-
-    gameState[175,87] = 1
-    gameState[175,88] = 1
-    gameState[175,89] = 1
-    gameState[175,90] = 1
-    gameState[175,91] = 1
-
-    gameState[176,89] = 1
-    gameState[176,90] = 1
-
-    gameState[179,92] = 1
-    gameState[179,91] = 1
-    gameState[179,87] = 1
-    gameState[179,86] = 1
-
-    gameState[180,87] = 1
-    gameState[180,88] = 1
-    gameState[180,89] = 1
-    gameState[180,90] = 1
-    gameState[180,91] = 1
-
-    gameState[181,87] = 1
-    gameState[181,88] = 1
-    gameState[181,90] = 1
-    gameState[181,91] = 1
-
-    gameState[182,87] = 1
-    gameState[182,88] = 1
-    gameState[182,90] = 1
-    gameState[182,91] = 1
-
-    gameState[183,88] = 1
-    gameState[183,89] = 1
-    gameState[183,90] = 1
-
-    gameState[187,87] = 1
-    gameState[187,86] = 1
-
-    gameState[188,87] = 1
-
-    gameState[189,86] = 1
-    gameState[189,85] = 1
-    gameState[189,84] = 1
-    gameState[189,84] = 1
-    gameState[190,84] = 1
-    
-    ##### 
-
-    gameState[179,83] = 1    
-    gameState[179,82] = 1    
-    gameState[178,82] = 1    
-    gameState[177,82] = 1    
-    gameState[176,81] = 1    
-    gameState[176,80] = 1    
-    gameState[177,80] = 1  
-
-    gameState[177,74] = 1  
-    gameState[176,74] = 1  
-    gameState[177,73] = 1  
-    gameState[172,74] = 1  
-    gameState[171,74] = 1  
-    gameState[171,73] = 1  
-    gameState[172,71] = 1
-    gameState[173,70] = 1
-    gameState[174,70] = 1
-    gameState[175,70] = 1
-    gameState[176,71] = 1
-
-    gameState[172,63] = 1
-    gameState[171,62] = 1
-    gameState[170,62] = 1
-    gameState[173,62] = 1
-    gameState[174,62] = 1
-    gameState[169,60] = 1
-    gameState[175,60] = 1
-    gameState[175,58] = 1
-    gameState[169,58] = 1
-    gameState[170,58] = 1
-    gameState[174,58] = 1
-    gameState[172,58] = 1
-    ###
-    gameState[170,51] = 1
-    gameState[169,51] = 1
-    gameState[170,50] = 1
-    gameState[169,49] = 1
-    gameState[168,49] = 1
-    gameState[167,49] = 1
-    gameState[167,48] = 1
-
-    gameState[154,89] = 1
-    gameState[153,89] = 1
-    gameState[151,89] = 1
-    gameState[149,89] = 1
-    gameState[148,89] = 1
-
-    gameState[148,88] = 1
-    gameState[154,88] = 1
-    
-    gameState[149,87] = 1
-    gameState[153,87] = 1
-    gameState[152,86] = 1
-    gameState[151,86] = 1
-    gameState[150,86] = 1
-
-    gameState[151,72] = 1
-    gameState[150,72] = 1
-    gameState[149,72] = 1
-    gameState[148,72] = 1
-    gameState[147,72] = 1
-    gameState[146,71] = 1
-    gameState[148,71] = 1
-    gameState[149,71] = 1
-    gameState[150,71] = 1
-    gameState[152,71] = 1
-    gameState[151,70] = 1
-    gameState[147,70] = 1
-    gameState[148,69] = 1
-    gameState[149,69] = 1
-    gameState[150,69] = 1
-    gameState[149,68] = 1
-
-    gameState[151,66] = 1
-    gameState[151,65] = 1
-    gameState[152,66] = 1
-    gameState[152,64] = 1
-    gameState[153,64] = 1
-    gameState[154,64] = 1
-    gameState[154,63] = 1
-    
-    #### Colapsadores
-
-    gameState[161,4] = 1
-    gameState[162,4] = 1
-    gameState[161,3] = 1
-    gameState[162,2] = 1
-    gameState[163,2] = 1
-    gameState[164,2] = 1
-    gameState[164,1] = 1
-
-    gameState[154,3] = 1
-    gameState[155,3] = 1
-    gameState[154,2] = 1
-    gameState[156,2] = 1
-    gameState[156,1] = 1
-    gameState[156,0] = 1
-    gameState[157,0] = 1
-
-    #### Disparador simple
-
-    gameState[107,69] = 1
-    gameState[106,69] = 1
-    gameState[106,68] = 1
-    gameState[107,68] = 1
-    
-    gameState[107,56] = 1
-    gameState[106,56] = 1
-    gameState[105,56] = 1
-    gameState[104,57] = 1
-    gameState[103,57] = 1
-
-    gameState[108,57] = 1
-    gameState[109,57] = 1
-    gameState[108,55] = 1
-    gameState[104,55] = 1
-
-    gameState[107,54] = 1
-    gameState[106,53] = 1
-    gameState[105,54] = 1
-
-    gameState[105,48] = 1
-    gameState[104,48] = 1
-    gameState[103,48] = 1
-    gameState[103,46] = 1
-    gameState[105,46] = 1
-
-    gameState[106,45] = 1
-    gameState[105,45] = 1
-    gameState[104,45] = 1
-    gameState[103,45] = 1
-    gameState[102,45] = 1
-
-    gameState[101,43] = 1
-    gameState[102,43] = 1
-    gameState[106,43] = 1
-    gameState[107,43] = 1
-    gameState[101,44] = 1
-    gameState[102,44] = 1
-    gameState[106,44] = 1
-    gameState[107,44] = 1
-
-    gameState[104,40] = 1
-    gameState[103,39] = 1
-    gameState[102,39] = 1
-    gameState[101,37] = 1
-    gameState[102,35] = 1
-    gameState[104,34] = 1
-    gameState[105,34] = 1
-    gameState[105,35] = 1
-    
-    # Segundo disparador simple
-    
-    gameState[92,69] = 1
-    gameState[93,69] = 1
-    gameState[92,68] = 1
-    gameState[93,68] = 1
-    
-    gameState[92,56] = 1
-    gameState[93,56] = 1
-    gameState[94,56] = 1
-    gameState[91,57] = 1
-    gameState[90,57] = 1
-    
-    gameState[95,57] = 1
-    gameState[96,57] = 1
-    gameState[91,55] = 1
-    gameState[95,55] = 1
-    
-    gameState[92,54] = 1
-    gameState[93,53] = 1
-    gameState[94,54] = 1
-    
-    gameState[94,48] = 1
-    gameState[95,48] = 1
-    gameState[96,48] = 1
-    gameState[94,46] = 1
-    gameState[96,46] = 1
-    
-    gameState[93,45] = 1
-    gameState[94,45] = 1
-    gameState[95,45] = 1
-    gameState[96,45] = 1
-    gameState[97,45] = 1
-    
-
-    gameState[92,43] = 1
-    gameState[93,43] = 1
-    gameState[97,43] = 1
-    gameState[98,43] = 1
-    gameState[92,44] = 1
-    gameState[93,44] = 1
-    gameState[97,44] = 1
-    gameState[98,44] = 1
-
-    
-    gameState[95,40] = 1
-    gameState[96,39] = 1
-    gameState[97,39] = 1
-    gameState[98,37] = 1
-    gameState[97,35] = 1
-    gameState[95,34] = 1
-    gameState[94,34] = 1
-    gameState[94,35] = 1
-
-    # Segundos colapsores
-
-    gameState[37,4] = 1
-    gameState[38,4] = 1
-    gameState[38,3] = 1
-    gameState[37,2] = 1
-    gameState[36,2] = 1
-    gameState[35,2] = 1
-    gameState[35,1] = 1
-
-    gameState[45,3] = 1
-    gameState[44,3] = 1
-    gameState[45,2] = 1
-    gameState[43,2] = 1
-    gameState[43,1] = 1
-    gameState[43,0] = 1
-    gameState[42,0] = 1
-
-    # Segundo disparador compuesto
-    
-    gameState[53,99] = 1
-    gameState[53,98] = 1
-
-    gameState[52,98] = 1
-
-    gameState[51,96] = 1
-    gameState[51,98] = 1
-
-    gameState[50,97] = 1
-    gameState[50,96] = 1
-
-    gameState[44,96] = 1
-
-    gameState[43,96] = 1
-    gameState[43,95] = 1
-    gameState[43,94] = 1
-
-    gameState[42,93] = 1
-    
-    gameState[41,93] = 1
-    gameState[41,94] = 1
-
-    gameState[36,91] = 1
-
-    gameState[35,90] = 1
-    gameState[35,91] = 1
-    gameState[35,92] = 1
-
-    gameState[34,89] = 1
-    gameState[34,90] = 1
-    gameState[34,91] = 1
-    gameState[34,92] = 1
-    gameState[34,93] = 1
-    
-    gameState[33,90] = 1
-    gameState[33,92] = 1
-    gameState[33,88] = 1
-    gameState[33,94] = 1
-    
-    gameState[32,88] = 1
-    gameState[32,94] = 1
-    gameState[32,89] = 1
-    gameState[32,93] = 1
-    
-    gameState[29,88] = 1
-    gameState[29,89] = 1
-
-    gameState[28,88] = 1
-    gameState[28,89] = 1
-
-    gameState[27,87] = 1
-    
-    gameState[26,87] = 1
-    gameState[26,88] = 1
-    gameState[26,89] = 1
-
-    gameState[25,91] = 1
-
-    gameState[24,87] = 1
-    gameState[24,88] = 1
-    gameState[24,89] = 1
-    gameState[24,90] = 1
-    gameState[24,91] = 1
-
-    gameState[23,89] = 1
-    gameState[23,90] = 1
-
-    gameState[20,92] = 1
-    gameState[20,91] = 1
-    gameState[20,87] = 1
-    gameState[20,86] = 1
-
-    gameState[19,87] = 1
-    gameState[19,88] = 1
-    gameState[19,89] = 1
-    gameState[19,90] = 1
-    gameState[19,91] = 1
-
-    gameState[18,87] = 1
-    gameState[18,88] = 1
-    gameState[18,90] = 1
-    gameState[18,91] = 1
-
-    gameState[17,87] = 1
-    gameState[17,88] = 1
-    gameState[17,90] = 1
-    gameState[17,91] = 1
-
-    gameState[16,88] = 1
-    gameState[16,89] = 1
-    gameState[16,90] = 1
-
-    gameState[12,87] = 1
-    gameState[12,86] = 1
-
-    gameState[11,87] = 1
-    
-    gameState[10,86] = 1
-    gameState[10,85] = 1
-    gameState[9,84] = 1
-    gameState[10,84] = 1
-    gameState[10,84] = 1
-    
-    ##### 
-
-    gameState[20,83] = 1    
-    gameState[20,82] = 1 
-
-    gameState[21,82] = 1 
-
-    gameState[22,82] = 1    
-    gameState[23,81] = 1    
-    gameState[22,80] = 1    
-    gameState[23,80] = 1  
-    
-    gameState[22,74] = 1  
-    gameState[23,74] = 1  
-    gameState[22,73] = 1  
-    gameState[27,74] = 1  
-    gameState[28,74] = 1  
-    gameState[28,73] = 1  
-    gameState[27,71] = 1
-    gameState[26,70] = 1
-    gameState[25,70] = 1
-    gameState[24,70] = 1
-    gameState[23,71] = 1
-
-    gameState[27,63] = 1
-    gameState[28,62] = 1
-    gameState[29,62] = 1
-    gameState[26,62] = 1
-    gameState[25,62] = 1
-    gameState[24,60] = 1
-    gameState[30,60] = 1
-    gameState[24,58] = 1
-    gameState[30,58] = 1
-    gameState[25,58] = 1
-    gameState[29,58] = 1
-    gameState[27,58] = 1
-    ###
-    gameState[29,51] = 1
-    gameState[30,51] = 1
-    gameState[29,50] = 1
-    gameState[30,49] = 1
-    gameState[31,49] = 1
-    gameState[32,49] = 1
-    gameState[32,48] = 1
-    
-    gameState[45,89] = 1
-    gameState[46,89] = 1
-    gameState[48,89] = 1
-    gameState[50,89] = 1
-    gameState[51,89] = 1
-
-    gameState[45,88] = 1
-    gameState[51,88] = 1
-    
-    gameState[46,87] = 1
-    gameState[50,87] = 1
-    gameState[47,86] = 1
-    gameState[48,86] = 1
-    gameState[49,86] = 1
-    
-    gameState[48,72] = 1
-    gameState[49,72] = 1
-    gameState[50,72] = 1
-    gameState[51,72] = 1
-    gameState[52,72] = 1
-    gameState[53,71] = 1
-    gameState[47,71] = 1
-    gameState[49,71] = 1
-    gameState[50,71] = 1
-    gameState[51,71] = 1
-    gameState[52,70] = 1
-    gameState[48,70] = 1
-    gameState[49,69] = 1
-    gameState[50,69] = 1
-    gameState[51,69] = 1
-    gameState[50,68] = 1
-    
-    gameState[48,66] = 1
-    gameState[48,65] = 1
-    gameState[47,66] = 1
-    gameState[47,64] = 1
-    gameState[46,64] = 1
-    gameState[45,64] = 1
-    gameState[45,63] = 1
+    gameState[0, 84] = 1
+    gameState[1, 84] = 1
+    gameState[1, 85] = 1
+    gameState[1, 86] = 1
+    gameState[2, 87] = 1
+    gameState[3, 86] = 1
+    gameState[3, 87] = 1
+    gameState[7, 88] = 1
+    gameState[7, 89] = 1
+    gameState[7, 90] = 1
+    gameState[8, 87] = 1
+    gameState[8, 88] = 1
+    gameState[8, 90] = 1
+    gameState[8, 91] = 1
+    gameState[9, 87] = 1
+    gameState[9, 88] = 1
+    gameState[9, 90] = 1
+    gameState[9, 91] = 1
+    gameState[10, 87] = 1
+    gameState[10, 88] = 1
+    gameState[10, 89] = 1
+    gameState[10, 90] = 1
+    gameState[10, 91] = 1
+    gameState[11, 82] = 1
+    gameState[11, 83] = 1
+    gameState[11, 86] = 1
+    gameState[11, 87] = 1
+    gameState[11, 91] = 1
+    gameState[11, 92] = 1
+    gameState[12, 82] = 1
+    gameState[13, 73] = 1
+    gameState[13, 74] = 1
+    gameState[13, 80] = 1
+    gameState[13, 82] = 1
+    gameState[14, 71] = 1
+    gameState[14, 74] = 1
+    gameState[14, 80] = 1
+    gameState[14, 81] = 1
+    gameState[14, 89] = 1
+    gameState[14, 90] = 1
+    gameState[15, 58] = 1
+    gameState[15, 60] = 1
+    gameState[15, 70] = 1
+    gameState[15, 87] = 1
+    gameState[15, 88] = 1
+    gameState[15, 89] = 1
+    gameState[15, 90] = 1
+    gameState[15, 91] = 1
+    gameState[16, 58] = 1
+    gameState[16, 62] = 1
+    gameState[16, 70] = 1
+    gameState[16, 91] = 1
+    gameState[17, 62] = 1
+    gameState[17, 70] = 1
+    gameState[17, 87] = 1
+    gameState[17, 88] = 1
+    gameState[17, 89] = 1
+    gameState[18, 58] = 1
+    gameState[18, 63] = 1
+    gameState[18, 71] = 1
+    gameState[18, 74] = 1
+    gameState[18, 87] = 1
+    gameState[19, 62] = 1
+    gameState[19, 73] = 1
+    gameState[19, 74] = 1
+    gameState[19, 88] = 1
+    gameState[19, 89] = 1
+    gameState[20, 50] = 1
+    gameState[20, 51] = 1
+    gameState[20, 58] = 1
+    gameState[20, 62] = 1
+    gameState[20, 88] = 1
+    gameState[20, 89] = 1
+    gameState[21, 49] = 1
+    gameState[21, 51] = 1
+    gameState[21, 58] = 1
+    gameState[21, 60] = 1
+    gameState[22, 49] = 1
+    gameState[23, 48] = 1
+    gameState[23, 49] = 1
+    gameState[23, 88] = 1
+    gameState[23, 89] = 1
+    gameState[23, 93] = 1
+    gameState[23, 94] = 1
+    gameState[24, 88] = 1
+    gameState[24, 90] = 1
+    gameState[24, 92] = 1
+    gameState[24, 94] = 1
+    gameState[25, 89] = 1
+    gameState[25, 90] = 1
+    gameState[25, 91] = 1
+    gameState[25, 92] = 1
+    gameState[25, 93] = 1
+    gameState[26, 1] = 1
+    gameState[26, 2] = 1
+    gameState[26, 90] = 1
+    gameState[26, 91] = 1
+    gameState[26, 92] = 1
+    gameState[27, 2] = 1
+    gameState[27, 91] = 1
+    gameState[28, 2] = 1
+    gameState[28, 4] = 1
+    gameState[29, 3] = 1
+    gameState[29, 4] = 1
+    gameState[32, 93] = 1
+    gameState[32, 94] = 1
+    gameState[33, 0] = 1
+    gameState[33, 93] = 1
+    gameState[34, 0] = 1
+    gameState[34, 1] = 1
+    gameState[34, 2] = 1
+    gameState[34, 94] = 1
+    gameState[34, 95] = 1
+    gameState[34, 96] = 1
+    gameState[35, 3] = 1
+    gameState[35, 96] = 1
+    gameState[36, 2] = 1
+    gameState[36, 3] = 1
+    gameState[36, 63] = 1
+    gameState[36, 64] = 1
+    gameState[36, 88] = 1
+    gameState[36, 89] = 1
+    gameState[37, 64] = 1
+    gameState[37, 87] = 1
+    gameState[37, 89] = 1
+    gameState[38, 64] = 1
+    gameState[38, 66] = 1
+    gameState[38, 71] = 1
+    gameState[38, 86] = 1
+    gameState[39, 65] = 1
+    gameState[39, 66] = 1
+    gameState[39, 70] = 1
+    gameState[39, 72] = 1
+    gameState[39, 86] = 1
+    gameState[39, 89] = 1
+    gameState[40, 69] = 1
+    gameState[40, 71] = 1
+    gameState[40, 72] = 1
+    gameState[40, 86] = 1
+    gameState[41, 68] = 1
+    gameState[41, 69] = 1
+    gameState[41, 71] = 1
+    gameState[41, 72] = 1
+    gameState[41, 87] = 1
+    gameState[41, 89] = 1
+    gameState[41, 96] = 1
+    gameState[41, 97] = 1
+    gameState[42, 69] = 1
+    gameState[42, 71] = 1
+    gameState[42, 72] = 1
+    gameState[42, 88] = 1
+    gameState[42, 89] = 1
+    gameState[42, 96] = 1
+    gameState[42, 98] = 1
+    gameState[43, 70] = 1
+    gameState[43, 72] = 1
+    gameState[43, 98] = 1
+    gameState[44, 71] = 1
+    gameState[44, 98] = 1
+    gameState[44, 99] = 1
+    gameState[81, 57] = 1
+    gameState[82, 55] = 1
+    gameState[82, 57] = 1
+    gameState[83, 43] = 1
+    gameState[83, 44] = 1
+    gameState[83, 54] = 1
+    gameState[83, 56] = 1
+    gameState[83, 68] = 1
+    gameState[83, 69] = 1
+    gameState[84, 43] = 1
+    gameState[84, 44] = 1
+    gameState[84, 45] = 1
+    gameState[84, 53] = 1
+    gameState[84, 56] = 1
+    gameState[84, 68] = 1
+    gameState[84, 69] = 1
+    gameState[85, 34] = 1
+    gameState[85, 35] = 1
+    gameState[85, 45] = 1
+    gameState[85, 46] = 1
+    gameState[85, 48] = 1
+    gameState[85, 54] = 1
+    gameState[85, 56] = 1
+    gameState[86, 34] = 1
+    gameState[86, 40] = 1
+    gameState[86, 45] = 1
+    gameState[86, 48] = 1
+    gameState[86, 55] = 1
+    gameState[86, 57] = 1
+    gameState[87, 39] = 1
+    gameState[87, 45] = 1
+    gameState[87, 46] = 1
+    gameState[87, 48] = 1
+    gameState[87, 57] = 1
+    gameState[88, 35] = 1
+    gameState[88, 39] = 1
+    gameState[88, 43] = 1
+    gameState[88, 44] = 1
+    gameState[88, 45] = 1
+    gameState[89, 37] = 1
+    gameState[89, 43] = 1
+    gameState[89, 44] = 1
+    gameState[92, 37] = 1
+    gameState[92, 43] = 1
+    gameState[92, 44] = 1
+    gameState[93, 35] = 1
+    gameState[93, 39] = 1
+    gameState[93, 43] = 1
+    gameState[93, 44] = 1
+    gameState[93, 45] = 1
+    gameState[94, 39] = 1
+    gameState[94, 45] = 1
+    gameState[94, 46] = 1
+    gameState[94, 48] = 1
+    gameState[94, 57] = 1
+    gameState[95, 34] = 1
+    gameState[95, 40] = 1
+    gameState[95, 45] = 1
+    gameState[95, 48] = 1
+    gameState[95, 55] = 1
+    gameState[95, 57] = 1
+    gameState[96, 34] = 1
+    gameState[96, 35] = 1
+    gameState[96, 45] = 1
+    gameState[96, 46] = 1
+    gameState[96, 48] = 1
+    gameState[96, 54] = 1
+    gameState[96, 56] = 1
+    gameState[97, 43] = 1
+    gameState[97, 44] = 1
+    gameState[97, 45] = 1
+    gameState[97, 53] = 1
+    gameState[97, 56] = 1
+    gameState[97, 68] = 1
+    gameState[97, 69] = 1
+    gameState[98, 43] = 1
+    gameState[98, 44] = 1
+    gameState[98, 54] = 1
+    gameState[98, 56] = 1
+    gameState[98, 68] = 1
+    gameState[98, 69] = 1
+    gameState[99, 55] = 1
+    gameState[99, 57] = 1
+    gameState[100, 57] = 1
+    gameState[137, 71] = 1
+    gameState[137, 98] = 1
+    gameState[137, 99] = 1
+    gameState[138, 70] = 1
+    gameState[138, 72] = 1
+    gameState[138, 98] = 1
+    gameState[139, 69] = 1
+    gameState[139, 71] = 1
+    gameState[139, 72] = 1
+    gameState[139, 88] = 1
+    gameState[139, 89] = 1
+    gameState[139, 96] = 1
+    gameState[139, 98] = 1
+    gameState[140, 68] = 1
+    gameState[140, 69] = 1
+    gameState[140, 71] = 1
+    gameState[140, 72] = 1
+    gameState[140, 87] = 1
+    gameState[140, 89] = 1
+    gameState[140, 96] = 1
+    gameState[140, 97] = 1
+    gameState[141, 69] = 1
+    gameState[141, 71] = 1
+    gameState[141, 72] = 1
+    gameState[141, 86] = 1
+    gameState[142, 65] = 1
+    gameState[142, 66] = 1
+    gameState[142, 70] = 1
+    gameState[142, 72] = 1
+    gameState[142, 86] = 1
+    gameState[142, 89] = 1
+    gameState[143, 64] = 1
+    gameState[143, 66] = 1
+    gameState[143, 71] = 1
+    gameState[143, 86] = 1
+    gameState[144, 64] = 1
+    gameState[144, 87] = 1
+    gameState[144, 89] = 1
+    gameState[145, 2] = 1
+    gameState[145, 3] = 1
+    gameState[145, 63] = 1
+    gameState[145, 64] = 1
+    gameState[145, 88] = 1
+    gameState[145, 89] = 1
+    gameState[146, 3] = 1
+    gameState[146, 96] = 1
+    gameState[147, 0] = 1
+    gameState[147, 1] = 1
+    gameState[147, 2] = 1
+    gameState[147, 94] = 1
+    gameState[147, 95] = 1
+    gameState[147, 96] = 1
+    gameState[148, 0] = 1
+    gameState[148, 93] = 1
+    gameState[149, 93] = 1
+    gameState[149, 94] = 1
+    gameState[152, 3] = 1
+    gameState[152, 4] = 1
+    gameState[153, 2] = 1
+    gameState[153, 4] = 1
+    gameState[154, 2] = 1
+    gameState[154, 91] = 1
+    gameState[155, 1] = 1
+    gameState[155, 2] = 1
+    gameState[155, 90] = 1
+    gameState[155, 91] = 1
+    gameState[155, 92] = 1
+    gameState[156, 89] = 1
+    gameState[156, 90] = 1
+    gameState[156, 91] = 1
+    gameState[156, 92] = 1
+    gameState[156, 93] = 1
+    gameState[157, 88] = 1
+    gameState[157, 90] = 1
+    gameState[157, 92] = 1
+    gameState[157, 94] = 1
+    gameState[158, 48] = 1
+    gameState[158, 49] = 1
+    gameState[158, 88] = 1
+    gameState[158, 89] = 1
+    gameState[158, 93] = 1
+    gameState[158, 94] = 1
+    gameState[159, 49] = 1
+    gameState[160, 49] = 1
+    gameState[160, 51] = 1
+    gameState[160, 58] = 1
+    gameState[160, 60] = 1
+    gameState[161, 50] = 1
+    gameState[161, 51] = 1
+    gameState[161, 58] = 1
+    gameState[161, 62] = 1
+    gameState[161, 88] = 1
+    gameState[161, 89] = 1
+    gameState[162, 62] = 1
+    gameState[162, 73] = 1
+    gameState[162, 74] = 1
+    gameState[162, 88] = 1
+    gameState[162, 89] = 1
+    gameState[163, 58] = 1
+    gameState[163, 63] = 1
+    gameState[163, 71] = 1
+    gameState[163, 74] = 1
+    gameState[163, 87] = 1
+    gameState[164, 62] = 1
+    gameState[164, 70] = 1
+    gameState[164, 87] = 1
+    gameState[164, 88] = 1
+    gameState[164, 89] = 1
+    gameState[165, 58] = 1
+    gameState[165, 62] = 1
+    gameState[165, 70] = 1
+    gameState[165, 91] = 1
+    gameState[166, 58] = 1
+    gameState[166, 60] = 1
+    gameState[166, 70] = 1
+    gameState[166, 87] = 1
+    gameState[166, 88] = 1
+    gameState[166, 89] = 1
+    gameState[166, 90] = 1
+    gameState[166, 91] = 1
+    gameState[167, 71] = 1
+    gameState[167, 74] = 1
+    gameState[167, 80] = 1
+    gameState[167, 81] = 1
+    gameState[167, 89] = 1
+    gameState[167, 90] = 1
+    gameState[168, 73] = 1
+    gameState[168, 74] = 1
+    gameState[168, 80] = 1
+    gameState[168, 82] = 1
+    gameState[169, 82] = 1
+    gameState[170, 82] = 1
+    gameState[170, 83] = 1
+    gameState[170, 86] = 1
+    gameState[170, 87] = 1
+    gameState[170, 91] = 1
+    gameState[170, 92] = 1
+    gameState[171, 87] = 1
+    gameState[171, 88] = 1
+    gameState[171, 89] = 1
+    gameState[171, 90] = 1
+    gameState[171, 91] = 1
+    gameState[172, 87] = 1
+    gameState[172, 88] = 1
+    gameState[172, 90] = 1
+    gameState[172, 91] = 1
+    gameState[173, 87] = 1
+    gameState[173, 88] = 1
+    gameState[173, 90] = 1
+    gameState[173, 91] = 1
+    gameState[174, 88] = 1
+    gameState[174, 89] = 1
+    gameState[174, 90] = 1
+    gameState[178, 86] = 1
+    gameState[178, 87] = 1
+    gameState[179, 87] = 1
+    gameState[180, 84] = 1
+    gameState[180, 85] = 1
+    gameState[180, 86] = 1
+    gameState[181, 84] = 1
     
     return gameState
