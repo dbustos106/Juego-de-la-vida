@@ -1,12 +1,7 @@
 import numpy as np
-from Letras.z import imageZ
+from Letras.i import imageI
 
-gameState = imageZ(200, 150)
+gameState = imageI(200, 150)
 coords = np.argwhere(gameState == 1)
 
-# Desplazar la figura a la esquina superior izquierda (0, 0)
-coords[:, 0] -= coords[:, 0].min()
-coords[:, 1] -= coords[:, 1].min()
-
-for x, y in coords:
-    print(f"gameState[{x}, {y}] = 1")
+print(f"Alto de I: {coords[:, 1].max() - coords[:, 1].min() + 1}")
