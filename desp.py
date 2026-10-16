@@ -1,7 +1,11 @@
 import numpy as np
-from Letras.i import imageI
+from Letras.t import imageT
 
-gameState = imageI(200, 150)
+gameState = imageT(200, 150)
 coords = np.argwhere(gameState == 1)
 
-print(f"Alto de I: {coords[:, 1].max() - coords[:, 1].min() + 1}")
+# Sumar 30 en y
+coords[:, 1] += 30
+
+for x, y in coords:
+    print(f"gameState[{x}, {y}] = 1")

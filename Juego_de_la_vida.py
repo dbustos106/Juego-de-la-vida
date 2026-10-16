@@ -24,19 +24,10 @@ MAX_FRAMES = None
 
 SEQUENCE = [
     {
-        "name": "Z",
-        "nxC": 200,
-        "nyC": 150,
-        "duration": 70,
-        "letters": [
-            {"generator": imageI, "x": 0, "y": 0},
-        ],
-    },
-    {
         "name": "ME",
         "nxC": 300,
         "nyC": 100,
-        "duration": 8,
+        "duration": 10,
         "letters": [
             {"generator": imageM, "x": 0, "y": 0},
             {"generator": imageE, "x": 200, "y": 5},
@@ -44,13 +35,13 @@ SEQUENCE = [
     },
     {
         "name": "TIS",
-        "nxC": 400,
-        "nyC": 150,
-        "duration": 10,
+        "nxC": 300,
+        "nyC": 125,
+        "duration": 20,
         "letters": [
-            {"generator": imageT, "x": 0, "y": 0},
-            {"generator": imageI, "x": 200, "y": 0},
-            {"generator": imageS, "x": 250, "y": 0},
+            {"generator": imageT, "x": 0, "y": 10},
+            {"generator": imageI, "x": 147, "y": 0},
+            {"generator": imageS, "x": 205, "y": 0},
         ],
     },
 ]
